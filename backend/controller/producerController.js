@@ -8,12 +8,12 @@ const producerModel = require("../model/producerModel");
     try{
     let addedProducer=await producerModel.create(producer);
     res.status(200).send({
-            "data":producer
+            "data":addedProducer
     })
 }
 catch(err){
     console.log(err);
-    res.send("Producer already exists")
+    res.status(400).send("Producer already exists")
 }
     
     }

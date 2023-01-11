@@ -6,6 +6,7 @@ const movieModel = require("./model/movieModel");
 const actorRouter = require("./routers/actorRouter");
 const producerRouter = require("./routers/producerRouter");
 const movieRouter = require("./routers/movieRouter");
+const userRouter = require("./routers/userRouter");
 
 const app=express();
 app.use(cors());
@@ -17,7 +18,8 @@ const port=process.env.PORT || 5000;
 
 app.use("/actor",actorRouter);
 app.use("/producer",producerRouter);
-app.use("/movie",movieRouter)
+app.use("/movie",movieRouter);
+app.use("/auth",userRouter)
 
 app.listen(port,()=>{
      connectDB()
