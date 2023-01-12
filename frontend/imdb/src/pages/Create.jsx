@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Actor from '../components/Actor'
 import { addActor, addProducer } from '../redux/action'
 import styles from "../styles/Navbar.module.css"
@@ -12,11 +13,18 @@ const Create = () => {
     const [year,setYear]=useState("");
     const [showActor,setShowActor]=useState(false);
     const [showProducer,setShowProducer]=useState(false);
+    const navigate=useNavigate();
 
     let dispatch=useDispatch();
-    let {Actors,Producers} =useSelector(state=>state)
+    let {Actors,Producers,user} =useSelector(state=>state)
+
+    useEffect(()=>{
+        if(!user)
+        navigate("/signin")
+           
+    },[user])
     const getActors=async(type)=>{
-        let url=`http://localhost:8080/${type}`
+        let url=`https://imdb-zmzs.onrender.com/${type}`
         let res=await fetch(url);
         let res2=await res.json();
         if(type=='actor')
@@ -41,7 +49,7 @@ const Create = () => {
         }
         //console.log(producer ,actors);
         console.log(Movie);
-        let res=await fetch('http://localhost:8080/movie',{
+        let res=await fetch('https://imdb-zmzs.onrender.com/movie',{
             method:"POST",
             headers:{
                 'Content-Type':'application/json'

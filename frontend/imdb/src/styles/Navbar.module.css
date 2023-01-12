@@ -49,3 +49,27 @@ input[type=text],input[type=date]{
     display: none;
     
 }
+.showUser{
+    display: block;
+    color: white;
+}
+
+.card{
+    display: flex;
+    padding: 30px;
+}
+.card div:last-child{
+    margin: auto;
+}
+.desc{
+    font-weight: bold;
+}
+.card span{
+    display: inline;
+}
+.active{
+    opacity: 1;
+}
+.notActive{
+    opacity: 0.3;
+}

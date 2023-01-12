@@ -25,11 +25,16 @@ const getMovies=async(req,res)=>{
 const updateMovie=async(req,res)=>{
        let {id}=req.params;
        let movie=req.body;
-       
+       try{
        let Movie=await movieModel.findOneAndUpdate({_id:id},movie,{new:true})
        res.send({
         "data":Movie
        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send({"error":"Intermal Error"})
+    }
 
 }
  

@@ -15,7 +15,7 @@ const Actor = ({type}) => {
      }
      
      const getActors=async()=>{
-        let url=`http://localhost:8080/${type}`
+        let url=`https://imdb-zmzs.onrender.com/${type}`
         let res=await fetch(url);
         let res2=await res.json();
         if(type=='actor')
@@ -32,7 +32,7 @@ const Actor = ({type}) => {
           return false;
      }
     const handleClick=async()=>{
-        let url=`http://localhost:8080/${type}`
+        let url=`https://imdb-zmzs.onrender.com/${type}`
         if(checkEmpty())
           {
             let res=await fetch(url,{

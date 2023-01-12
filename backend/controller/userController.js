@@ -8,7 +8,7 @@ let user=req.body
 try{
 let found=await userModel.findOne({email:user.email});
 if(found){
-    res.status(401).send("user already exists");
+    res.status(401).send({"error":"user already exists"});
     return;
 }
  let hashedPass=bcrypt.hashSync(user.password,10);
@@ -20,7 +20,7 @@ if(found){
 }
 catch(err){
     console.log(err);
-    res.status(500).send('Internal error')
+    res.status(500).send({"error":'Internal error'})
     return;
 }
 
@@ -31,13 +31,13 @@ const login=async(req,res)=>{
     try{
         let found=await userModel.findOne({email:user.email})
         if(!found){
-            res.status(401).send("User not found")
+            res.status(401).send({"error":"User not found"})
             return;
         }
         else{
             let match=bcrypt.compareSync(user.password,found.password)
             if(!match){
-                res.status(402).send("Invalid password");
+                res.status(402).send({"error":"Invalid password"});
                 return;
             }
             else{
@@ -51,12 +51,12 @@ const login=async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        res.status(500).send("Internal error");
+        res.status(500).send({"error":"Internal error"});
         return;
     }
 }
 const getUser=async(req,res)=>{
-    let {token}=req.body;
+    let {token}=req.query;
     try{
 
         let user= jwt.verify(token,"SECRET")
@@ -66,13 +66,13 @@ const getUser=async(req,res)=>{
             })
         }
         else{
-            res.status(400).send("Invalid token");
+            res.status(400).send({"error":"Invalid token"});
             return;
         }
     }
     catch(err){
         console.log(err);
-        res.status(500).send("Internal Error")
+        res.status(500).send({"error":"Internal Error"})
         return;
     }
 }
