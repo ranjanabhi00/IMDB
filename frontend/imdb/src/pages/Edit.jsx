@@ -11,7 +11,7 @@ const Edit = () => {
     
     const [showActor,setShowActor]=useState(false);
     const [showProducer,setShowProducer]=useState(false);
-    
+    let navigate=useNavigate();
 
     let dispatch=useDispatch();
     let {Actors,Producers,user} =useSelector(state=>state)
@@ -55,7 +55,9 @@ const Edit = () => {
         console.log(err);
       }
      }
-     
+     if(user==""){
+          return navigate("/")
+     }
 
   return (
     <div>

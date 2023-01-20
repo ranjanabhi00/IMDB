@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import image from "../images/imdb-logo.png"
@@ -6,6 +6,7 @@ import { login, logout } from '../redux/action'
 import styles from "../styles/Navbar.module.css"
 
 const Navbar = () => {
+  const [loading,setLoading]=useState(false)
   const {user}=useSelector(state=>state);
   const dispatch=useDispatch();
 
@@ -13,19 +14,7 @@ const Navbar = () => {
       localStorage.removeItem("LOGIN_TOKEN");
       dispatch(logout());
   }
-  const getUser=async()=>{
-    let token=localStorage.getItem("LOGIN_TOKEN");
-    if(!token){
-      return;
-    }
-    let res=await fetch(`https://imdb-zmzs.onrender.com/auth/getUser?token=${token}`)
-    let res2=await res.json();
-    console.log(res2);
-    dispatch(login(res2.data.name))
-  }
-  useEffect(()=>{
-       getUser();
-  },[user])
+  
 
   return (
     <div className={styles.header}>

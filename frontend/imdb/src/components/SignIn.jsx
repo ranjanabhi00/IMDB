@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 
@@ -6,6 +7,8 @@ const SignIn = () => {
   const [email,setEmail]=useState("");
   const [password,setPassword] =useState("");
   let navigate=useNavigate();
+  let {user}=useSelector(state=>state)
+  let dispatch=useDispatch()
 
   const login=async()=>{
 if(email && password){
